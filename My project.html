@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Website dengan Dropdown & Mode Gelap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --hover-color: #e74c3c;
+            --url-bg: #f5f5f5;
+            --menu-bg: #ffffff;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --footer-bg: #f8f9fa;
+        }
+
+        .dark-mode {
+            --bg-color: #222222;
+            --text-color: #f0f0f0;
+            --hover-color: #ff6b5b;
+            --url-bg: #333333;
+            --menu-bg: #2d2d2d;
+            --shadow: 0 2px 5px rgba(0,0,0,0.3);
+            --footer-bg: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: var(--menu-bg);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .menu-item > a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 14px;
+            text-transform: uppercase;
+            padding: 10px 0;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .menu-item > a:hover {
+            color: var(--hover-color);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--menu-bg);
+            box-shadow: var(--shadow);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .menu-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-item a {
+            padding: 8px 20px;
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-transform: none;
+        }
+
+        .dropdown-item a:hover {
+            background-color: rgba(0,0,0,0.1);
+            color: var(--hover-color);
+        }
+
+        .url-display {
+            background-color: var(--url-bg);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            color: var(--text-color);
+            font-family: 'Amiri', serif;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 20px;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .Arabic {
+            direction: rtl;
+            font-size: 28px;
+            font-family: 'Amiri', serif;
+            margin: 20px 0;
+        }
+
+        .Terjemahan {
+            font-size: 16px;
+            margin: 10px 0 20px;
+        }
+
+        .quran {
+            font-style: italic;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--menu-bg);
+                flex-direction: column;
+                box-shadow: var(--shadow);
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+                padding: 10px 20px;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                display: none;
+                padding-left: 15px;
+            }
+
+            .menu-item:hover .dropdown-menu {
+                display: block;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .url-display {
+                font-size: 20px;
+                padding: 10px 0;
+            }
+            
+            .Arabic {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="header-container">
+            <a href="#" class="logo">Syabab_res</a>
+            
+            <div class="menu-container">
+                <button class="mobile-menu-btn">☰</button>
+                
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="#">Beranda</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">My Book</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="Pdf gambar.html">Book 1</a></li>
+                            <li class="dropdown-item"><a href="#">Book 2</a></li>
+                            <li class="dropdown-item"><a href="#">Book 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Ekonomi</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="#">Bisnis</a></li>
+                            <li class="dropdown-item"><a href="#">Keuangan</a></li>
+                            <li class="dropdown-item"><a href="#">Energi</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Sosial</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="#">Pendidikan</a></li>
+                            <li class="dropdown-item"><a href="#">Kesehatan</a></li>
+                            <li class="dropdown-item"><a href="#">Lingkungan</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Hiburan</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="#">Film</a></li>
+                            <li class="dropdown-item"><a href="Musik.html">Musik</a></li>
+                            <li class="dropdown-item"><a href="Galeri.html">Gambar Mufid</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <button class="dark-mode-toggle">🌓</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="url-display">
+        السلام عليكم
+    </div>
+    <div class="container">
+      <p class="Arabic">كن معي يا الله فلا معين غيرك</p>
+      <p class="Terjemahan">Tetaplah bersamaku ya Allah, sebab tidak ada penolongku selain dirimu</p>
+      <p class="quran">Dan sesungguhnya Kami telah mengutus Rasul pada tiap-tiap umat (untuk menyerukan): Sembahlah Allah (saja), dan jauhilah Thaghut itu. (QS. An-Nahl: 36)</p>
+    </div>
+
+    <footer class="footer">
+        2025 Tetap semangat dalam belajar
+    </footer>
+
+    <script>
+        // Toggle Dark Mode
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Simpan preferensi mode di localStorage
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        });
+
+        // Cek preferensi mode saat memuat halaman
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+        }
+
+        // Toggle Mobile Menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const menu = document.querySelector('.menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Tutup menu mobile saat mengklik item
+        const menuItems = document.querySelectorAll('.menu-item > a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
