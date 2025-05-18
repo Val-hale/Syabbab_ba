@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syabab_res - Motivasi Islami</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --hover-color: #e74c3c;
+            --url-bg: #f5f5f5;
+            --menu-bg: #ffffff;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --footer-bg: #f8f9fa;
+            --primary-color: #2c5e8a;
+            --secondary-color: #4a9d9c;
+        }
+
+        .dark-mode {
+            --bg-color: #222222;
+            --text-color: #f0f0f0;
+            --hover-color: #ff6b5b;
+            --url-bg: #333333;
+            --menu-bg: #2d2d2d;
+            --shadow: 0 2px 5px rgba(0,0,0,0.3);
+            --footer-bg: #1a1a1a;
+            --primary-color: #3a7cb9;
+            --secondary-color: #5bb9b8;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: var(--menu-bg);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .menu-item > a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 14px;
+            text-transform: uppercase;
+            padding: 10px 0;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .menu-item > a:hover {
+            color: var(--hover-color);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--menu-bg);
+            box-shadow: var(--shadow);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .menu-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-item a {
+            padding: 8px 20px;
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-transform: none;
+        }
+
+        .dropdown-item a:hover {
+            background-color: rgba(0,0,0,0.1);
+            color: var(--hover-color);
+        }
+
+        .url-display {
+            background-color: var(--url-bg);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            color: var(--text-color);
+            font-family: 'Amiri', serif;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 20px;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Homepage Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://i.pinimg.com/736x/ae/fb/cf/aefbcfc6fff7e2f98050160ca3fae0c7.jpg') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-family: 'Amiri', serif;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .motivasi-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            font-family: 'Amiri', serif;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 15px auto;
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .quote-card {
+            background: var(--menu-bg);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .quote-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .quote-card::before {
+    content: "\""; /* Menggunakan escape character untuk tanda kutip */
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0,0,0,0.05);
+    font-family: serif;
+    line-height: 1;
+}
+
+        .quote-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-align: right;
+            font-family: 'Amiri', serif;
+        }
+
+        .quote-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: rgba(0,0,0,0.05);
+            font-size: 60px;
+            z-index: 0;
+        }
+
+        .Arabic {
+            direction: rtl;
+            font-size: 28px;
+            font-family: 'Amiri', serif;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .Terjemahan {
+            font-size: 16px;
+            margin: 10px 0 20px;
+            text-align: center;
+        }
+
+        .quran {
+            font-style: italic;
+            margin: 20px 0;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--menu-bg);
+                flex-direction: column;
+                box-shadow: var(--shadow);
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+                padding: 10px 20px;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                display: none;
+                padding-left: 15px;
+            }
+
+            .menu-item:hover .dropdown-menu {
+                display: block;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .url-display {
+                font-size: 20px;
+                padding: 10px 0;
+            }
+            
+            .Arabic {
+                font-size: 24px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .quotes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="header-container">
+            <a href="indek.html" class="logo">Syabab_res</a>
+            
+            <div class="menu-container">
+                <button class="mobile-menu-btn">☰</button>
+                
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="#">Beranda</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">My Book</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="Pdf gambar.html">Book 1</a></li>
+                            <li class="dropdown-item"><a href="#">Book 2</a></li>
+                            <li class="dropdown-item"><a href="#">Book 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Ekonomi</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="#">Bisnis</a></li>
+                            <li class="dropdown-item"><a href="#">Keuangan</a></li>
+                            <li class="dropdown-item"><a href="#">Energi</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Sosial</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="#">Pendidikan</a></li>
+                            <li class="dropdown-item"><a href="#">Kesehatan</a></li>
+                            <li class="dropdown-item"><a href="#">Lingkungan</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Hiburan</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="Daftar My game.html">Games</a></li>
+                            <li class="dropdown-item"><a href="Musik.html">Musik</a></li>
+                            <li class="dropdown-item"><a href="Galeri.html">Gambar Mufid</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <button class="dark-mode-toggle">🌓</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="url-display">
+        السلام عليكم ورحمة الله وبركاته
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Kata-Kata Motivasi Islami</h1>
+            <p class="hero-subtitle">"Barangsiapa yang bertakwa kepada Allah niscaya Dia akan mengadakan baginya jalan keluar." (QS. At-Talaq: 2)</p>
+        </div>
+    </section>
+
+    <!-- Motivasi Section -->
+    <div class="motivasi-container">
+        <h2 class="section-title">Kata-Kata Penyejuk Hati</h2>
+        <div class="quotes-grid">
+            <!-- Quote 1 -->
+            <div class="quote-card">
+                <p class="quote-text">"Janganlah kamu berduka cita, sesungguhnya Allah selalu bersama kita." (QS. At-Taubah: 40)</p>
+                <p class="quote-author">- Al-Qur'an</p>
+                <i class="fas fa-quote-right quote-icon"></i>
+            </div>
+            
+            <!-- Quote 2 -->
+            <div class="quote-card">
+                <p class="quote-text">"Ketahuilah bahwa kemenangan bersama kesabaran, kelapangan bersama kesempitan, dan kesulitan bersama kemudahan."</p>
+                <p class="quote-author">- Ibnu Qayyim</p>
+                <i class="fas fa-mosque quote-icon"></i>
+            </div>
+            
+            <!-- Quote 3 -->
+            <div class="quote-card">
+                <p class="quote-text">"Allah tidak melihat kepada rupa dan harta kalian, tetapi Dia melihat kepada hati dan amal kalian."</p>
+                <p class="quote-author">- Rasulullah ﷺ</p>
+                <i class="fas fa-star-and-crescent quote-icon"></i>
+            </div>
+            
+            <!-- Quote 4 -->
+            <div class="quote-card">
+                <p class="quote-text">"Bersabarlah, karena kesabaran itu adalah cahaya yang menerangi jalan hidup."</p>
+                <p class="quote-author">- Umar bin Khattab</p>
+                <i class="fas fa-pray quote-icon"></i>
+            </div>
+            
+            <!-- Quote 5 -->
+            <div class="quote-card">
+                <p class="quote-text">"Dunia ini ibarat bayangan. Jika kau berusaha menangkapnya, ia akan lari. Tapi jika kau membelakanginya, ia tak punya pilihan selain mengikutimu."</p>
+                <p class="quote-author">- Ibnu Atha'illah</p>
+                <i class="fas fa-book-quran quote-icon"></i>
+            </div>
+            
+            <!-- Quote 6 -->
+            <div class="quote-card">
+                <p class="quote-text">"Jangan menjelaskan tentang dirimu kepada siapa pun, karena yang menyukaimu tidak butuh itu. Dan yang membencimu tidak percaya itu."</p>
+                <p class="quote-author">- Ali bin Abi Thalib</p>
+                <i class="fas fa-hands-praying quote-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ayat Section -->
+    <div class="container">
+        <p class="Arabic">كن معي يا الله فلا معين غيرك</p>
+        <p class="Terjemahan">Tetaplah bersamaku ya Allah, sebab tidak ada penolongku selain dirimu</p>
+        <p class="quran">Dan sesungguhnya Kami telah mengutus Rasul pada tiap-tiap umat (untuk menyerukan): Sembahlah Allah (saja), dan jauhilah Thaghut itu. (QS. An-Nahl: 36)</p>
+    </div>
+
+    <footer class="footer">
+        &copy; 2025 Syabab_res - Tetap semangat dalam belajar dan beribadah
+    </footer>
+
+    <script>
+        // Toggle Dark Mode
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Simpan preferensi mode di localStorage
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        });
+
+        // Cek preferensi mode saat memuat halaman
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+        }
+
+        // Toggle Mobile Menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const menu = document.querySelector('.menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Tutup menu mobile saat mengklik item
+        const menuItems = document.querySelectorAll('.menu-item > a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+
+        // Animasi untuk quote cards
+        const quoteCards = document.querySelectorAll('.quote-card');
+        quoteCards.forEach((card, index) => {
+            // Delay animation for each card
+            card.style.animation = `fadeInUp 0.5s ease ${index * 0.1}s both`;
+        });
+    </script>
+</body>
+</html>
